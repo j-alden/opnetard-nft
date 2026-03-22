@@ -57,9 +57,15 @@ export function MintSection() {
                 <p className="status">
                     Transaction sent — waiting for Bitcoin block.{' '}
                     {mintTxId && (
-                        <a href={`https://mempool.space/tx/${mintTxId}`} target="_blank" rel="noreferrer">
-                            View on Mempool
-                        </a>
+                        <>
+                            <a href={`https://opscan.org/transactions/${mintTxId}?network=mainnet`} target="_blank" rel="noreferrer">
+                                View on OPScan
+                            </a>
+                            {' · '}
+                            <a href={`https://mempool.space/tx/${mintTxId}`} target="_blank" rel="noreferrer">
+                                Mempool
+                            </a>
+                        </>
                     )}
                 </p>
             )}
@@ -71,9 +77,15 @@ export function MintSection() {
                         <p>Token{mintedTokenIds.length > 1 ? 's' : ''}: #{mintedTokenIds.join(', #')}</p>
                     )}
                     {mintTxId && (
-                        <a href={`https://mempool.space/tx/${mintTxId}`} target="_blank" rel="noreferrer">
-                            View transaction
-                        </a>
+                        <>
+                            <a href={`https://opscan.org/transactions/${mintTxId}?network=mainnet`} target="_blank" rel="noreferrer">
+                                View on OPScan
+                            </a>
+                            {' · '}
+                            <a href={`https://mempool.space/tx/${mintTxId}`} target="_blank" rel="noreferrer">
+                                Mempool
+                            </a>
+                        </>
                     )}
                     <button onClick={resetMint} style={{ marginTop: 12 }}>Mint more</button>
                 </div>
