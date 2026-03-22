@@ -9,13 +9,13 @@ type Tab = 'mint' | 'gallery';
 
 const IMAGE_BASE = '/mosaic';
 
-// 25 tokens spread evenly across the 1000 — shows variety without revealing the full collection
+// 25 tokens picked for visual variety across the collection
 const MOSAIC_TOKENS = [
-    25,  65, 112, 158, 205,
-   252, 298, 345, 392, 438,
-   485, 532, 578, 625, 672,
-   718, 765, 812, 858, 905,
-   952, 999,  42, 188, 734,
+   500, 111, 703,  33, 961,
+   260, 830, 167, 555,  77,
+   390, 988, 644,   7, 472,
+   222, 750, 303, 919,  55,
+   609, 444, 680, 799, 877,
 ];
 
 export function App() {
