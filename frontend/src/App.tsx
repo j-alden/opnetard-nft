@@ -125,8 +125,8 @@ export function App() {
             <footer className="footer">
                 <a href="https://opnetard.com" target="_blank" rel="noreferrer">opnetard.com</a>
                 <a href="https://opnet.org" target="_blank" rel="noreferrer">OPNet</a>
-                <a href="https://t.me/opnetard" target="_blank" rel="noreferrer">Telegram</a>
-                <a href="https://x.com/opnetard" target="_blank" rel="noreferrer">Twitter</a>
+                <a href="https://t.me/op_netard" target="_blank" rel="noreferrer">Telegram</a>
+                <a href="https://x.com/OP_NETARD" target="_blank" rel="noreferrer">Twitter</a>
                 <a href="https://opscan.org/contracts/0x0f9fd9d56df74d6b0d4300c01893afdfa5b034f2eedb3bf5e212df8a29d6c6dc?network=mainnet" target="_blank" rel="noreferrer">Contract</a>
             </footer>
         </div>
