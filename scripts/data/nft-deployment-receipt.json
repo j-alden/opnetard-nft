@@ -1,0 +1,10 @@
+{
+  "status": "success",
+  "network": "mainnet",
+  "contractAddress": "op1sqppm2hmzkynx0jl3yjjhhldd6e80rxm49g7aauhf",
+  "deployTxHash": "3af1e74109f522454d4b212cf999d9fba6e0582b7a2282f991fc33836142df32",
+  "baseURI": "ipfs://bafybeicilrtsvb2pl5wcevcj2kl5urnijg23xro7jkkhnmhtu47sbk4oly/",
+  "metadataCid": "bafybeicilrtsvb2pl5wcevcj2kl5urnijg23xro7jkkhnmhtu47sbk4oly",
+  "blockNumber": 941752,
+  "deployedAt": "2026-03-22T20:47:41.526Z"
+}

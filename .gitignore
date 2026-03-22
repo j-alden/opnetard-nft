@@ -1,0 +1,9 @@
+node_modules/
+.env
+build/
+dist/
+output/
+*.xcf
+.DS_Store
+scripts/output/
+scripts/data/ipfs-cids.json

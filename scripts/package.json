@@ -1,0 +1,40 @@
+{
+    "name": "opnetard-nft-scripts",
+    "version": "1.0.0",
+    "type": "module",
+    "description": "OPNETARD NFT trait generation, image compositing, IPFS upload, and deploy scripts",
+    "scripts": {
+        "generate-traits": "npx tsx src/generate-traits.ts",
+        "generate-images": "npx tsx src/generate-images.ts",
+        "generate-metadata": "npx tsx src/generate-metadata.ts",
+        "upload-ipfs": "npx tsx src/upload-ipfs.ts",
+        "deploy": "npx tsx src/deploy-nft.ts",
+        "pipeline": "npm run generate-traits && npm run generate-images && npm run generate-metadata"
+    },
+    "dependencies": {
+        "@btc-vision/bitcoin": "rc",
+        "@btc-vision/transaction": "1.8.0-rc.11",
+        "@noble/hashes": "2.0.1",
+        "@storacha/client": "^2.1.2",
+        "@web3-storage/w3up-client": "^17.3.0",
+        "dotenv": "^17.3.1",
+        "files-from-path": "^1.1.4",
+        "form-data": "^4.0.5",
+        "opnet": "1.8.1-rc.19",
+        "sharp": "^0.34.2"
+    },
+    "devDependencies": {
+        "@types/node": "latest",
+        "tsx": "latest",
+        "typescript": "latest"
+    },
+    "overrides": {
+        "@noble/hashes": "2.0.1",
+        "bip39": {
+            "@noble/hashes": "1.6.1"
+        },
+        "@scure/bip39": {
+            "@noble/hashes": "1.8.0"
+        }
+    }
+}

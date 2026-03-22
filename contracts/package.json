@@ -1,0 +1,30 @@
+{
+    "name": "opnetard-nft-contracts",
+    "version": "1.0.0",
+    "description": "OPNETARD OP-721 NFT contract",
+    "type": "module",
+    "scripts": {
+        "build": "asc src/index.ts --outFile build/OpnetardNFT.wasm --optimizeLevel 3 --shrinkLevel 1 --converge --enable sign-extension --enable mutable-globals --enable nontrapping-f2i --enable bulk-memory --enable simd --enable reference-types --enable multi-value --runtime stub --memoryBase 0 --initialMemory 1 --exportStart start --transform @btc-vision/opnet-transform --use abort=src/index/abort",
+        "typecheck": "tsc --noEmit",
+        "lint": "eslint src --ext .ts",
+        "clean": "rm -rf build/*"
+    },
+    "dependencies": {
+        "@btc-vision/as-bignum": "0.1.2",
+        "@btc-vision/btc-runtime": "rc"
+    },
+    "devDependencies": {
+        "@assemblyscript/loader": "latest",
+        "@btc-vision/assemblyscript": "^0.29.2",
+        "@btc-vision/opnet-transform": "1.1.0",
+        "@eslint/js": "^9.39.2",
+        "eslint": "^9.39.2",
+        "typescript": "^5.0.0"
+    },
+    "overrides": {
+        "@noble/hashes": "2.0.1",
+        "bip39": {
+            "@noble/hashes": "1.6.1"
+        }
+    }
+}

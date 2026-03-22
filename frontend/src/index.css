@@ -1,0 +1,264 @@
+/* OPNETARD NFT — minimal functional styles */
+
+:root {
+    --orange: #f97316;
+    --orange-dark: #c2410c;
+    --bg: #0f0f0f;
+    --surface: #1a1a1a;
+    --surface2: #252525;
+    --border: #333;
+    --text: #f0f0f0;
+    --text-muted: #888;
+    --green: #22c55e;
+    --red: #ef4444;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Courier New', monospace;
+    min-height: 100vh;
+}
+
+.app {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 16px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.logo-text { font-size: 1.2rem; font-weight: bold; color: var(--orange); display: block; }
+.logo-sub  { font-size: 0.7rem; color: var(--text-muted); display: block; }
+
+.btn-connect, .btn-disconnect {
+    background: var(--orange);
+    color: #000;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+.btn-disconnect { background: var(--surface2); color: var(--text); }
+
+.wallet-connected { display: flex; align-items: center; gap: 10px; }
+.wallet-address { font-size: 0.8rem; color: var(--text-muted); }
+
+/* Tabs */
+.tabs {
+    display: flex;
+    gap: 2px;
+    padding: 16px 0 0;
+    border-bottom: 1px solid var(--border);
+}
+.tab {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    padding: 8px 20px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+    border-bottom: 2px solid transparent;
+}
+.tab.active {
+    color: var(--orange);
+    border-bottom-color: var(--orange);
+}
+
+/* Main */
+.main { flex: 1; padding: 32px 0; }
+
+/* Mint page */
+.mint-page { max-width: 480px; margin: 0 auto; text-align: center; }
+.mint-hero h1 { font-size: 1.8rem; margin-bottom: 8px; }
+.mint-hero p { color: var(--text-muted); margin-bottom: 6px; }
+.mint-note { font-size: 0.8rem; color: var(--text-muted); }
+
+/* Mint section */
+.mint-section { margin-top: 32px; }
+.mint-stats {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 24px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.amount-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+}
+.amount-selector button {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.mint-cost {
+    font-size: 1rem;
+    margin-bottom: 16px;
+    color: var(--text-muted);
+}
+.mint-usd { margin-left: 8px; font-size: 0.8rem; }
+
+.btn-mint {
+    background: var(--orange);
+    color: #000;
+    border: none;
+    padding: 14px 40px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+}
+.btn-mint:hover { background: var(--orange-dark); }
+
+.connect-prompt, .sold-out, .status {
+    color: var(--text-muted);
+    padding: 16px;
+    font-size: 0.9rem;
+}
+.sold-out { color: var(--red); font-size: 1.2rem; font-weight: bold; }
+
+.mint-success {
+    background: #0f2f1a;
+    border: 1px solid var(--green);
+    padding: 16px;
+    margin-top: 16px;
+    color: var(--green);
+}
+.mint-success a { color: var(--orange); display: block; margin-top: 8px; font-size: 0.85rem; }
+
+.mint-error {
+    background: #2f0f0f;
+    border: 1px solid var(--red);
+    padding: 16px;
+    margin-top: 16px;
+    color: var(--red);
+}
+.mint-error button {
+    margin-top: 8px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 6px 14px;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+/* Gallery */
+.gallery-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+.btn-refresh {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 6px 14px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.8rem;
+}
+.gallery-empty { text-align: center; color: var(--text-muted); padding: 48px; }
+.gallery-empty button { margin-top: 12px; background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 8px 16px; cursor: pointer; font-family: inherit; }
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+/* Token card */
+.token-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    position: relative;
+}
+.token-card.equipped { border-color: var(--orange); }
+.equipped-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: var(--orange);
+    color: #000;
+    font-size: 0.65rem;
+    font-weight: bold;
+    padding: 2px 6px;
+    z-index: 1;
+}
+
+.token-image-wrap { aspect-ratio: 1; overflow: hidden; background: var(--surface2); }
+.token-image-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.token-image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 1.5rem;
+}
+
+.token-info { padding: 12px; }
+.token-info h3 { font-size: 0.9rem; margin-bottom: 8px; }
+
+.token-traits { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 12px; }
+.trait-pill {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    font-size: 0.65rem;
+}
+.trait-type { color: var(--text-muted); margin-right: 4px; }
+.trait-value { color: var(--text); }
+
+.btn-equip, .btn-unequip {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+.btn-equip { background: var(--orange); color: #000; }
+.btn-unequip { background: var(--surface2); border: 1px solid var(--border); color: var(--text-muted); }
+
+/* Footer */
+.footer {
+    padding: 20px 0;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+.footer a { color: var(--text-muted); text-decoration: none; font-size: 0.8rem; }
+.footer a:hover { color: var(--orange); }

@@ -1,0 +1,27 @@
+{
+    "name": "opnetard-nft-frontend",
+    "private": true,
+    "version": "1.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite --port 4174",
+        "build": "tsc --noEmit && vite build",
+        "preview": "vite preview --port 4174"
+    },
+    "dependencies": {
+        "react": "19.2.4",
+        "react-dom": "19.2.4",
+        "opnet": "1.8.7",
+        "@btc-vision/bitcoin": "7.0.0",
+        "@btc-vision/transaction": "1.8.2",
+        "@btc-vision/walletconnect": "1.10.5",
+        "zustand": "^5.0.0"
+    },
+    "devDependencies": {
+        "@types/react": "19.2.14",
+        "@types/react-dom": "19.2.3",
+        "@vitejs/plugin-react": "^4.3.4",
+        "typescript": "^5.6.3",
+        "vite": "^5.4.10"
+    }
+}
