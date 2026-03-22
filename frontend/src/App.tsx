@@ -43,21 +43,12 @@ export function App() {
                     />
                 ))}
             </div>
-            {/* Banner — full-width, at the very top */}
-            <div className="banner-wrap">
-                <img
-                    src="https://www.magicinternet.meme/opnetard-banner.png"
-                    alt="OPNETARD"
-                    className="banner-img"
-                />
-            </div>
-
             <header className="header">
                 <a href="https://opnetard.com" target="_blank" rel="noreferrer" className="header-logo">
                     <img
-                        src="https://oqo47j6pxmwuqzov.public.blob.vercel-storage.com/logos/og.png"
+                        src="https://www.magicinternet.meme/opnetard-banner.png"
                         alt="OPNETARD"
-                        className="logo-img"
+                        className="banner-img"
                     />
                 </a>
 
