@@ -27,7 +27,7 @@ export function MintSection() {
                     <div className="amount-selector">
                         <button onClick={() => setAmount((a) => Math.max(1, a - 1))}>−</button>
                         <span>{amount}</span>
-                        <button onClick={() => setAmount((a) => Math.min(5, a + 1))}>+</button>
+                        <button onClick={() => setAmount((a) => Math.min(50, a + 1))}>+</button>
                     </div>
                     <div className="mint-cost">
                         {totalCostSats.toLocaleString()} sats

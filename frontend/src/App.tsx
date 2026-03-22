@@ -90,7 +90,7 @@ export function App() {
                             <div className="mint-hero">
                                 <h1>1,000 unique Opnetards</h1>
                                 <p>Bitcoin Layer 1 smart contracts. OPNet.</p>
-                                <p className="mint-note">10,000 sats per mint · Max 5 per transaction</p>
+                                <p className="mint-note">10,000 sats per mint · Max 50 per transaction</p>
                                 <p className="mint-note">100% of raised funds go to $OPTARD LP on Motoswap</p>
                             </div>
                             <MintSection />
