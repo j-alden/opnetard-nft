@@ -1,4 +1,4 @@
-/* OPNETARD NFT — minimal functional styles */
+/* OPNETARD NFT */
 
 :root {
     --orange: #f97316;
@@ -29,19 +29,55 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
-/* Header */
+/* ── Background scatter ─────────────────────────────────────────────────────── */
+
+.nft-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.nft-bg-item {
+    position: absolute;
+    object-fit: cover;
+    opacity: 0.13;
+    filter: blur(1.5px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Only show scatter on wide screens where side margins exist */
+@media (max-width: 960px) {
+    .nft-bg { display: none; }
+}
+
+/* ── All content above background ───────────────────────────────────────────── */
+
+.header, nav, .main, .footer { position: relative; z-index: 1; }
+
+/* ── Header ─────────────────────────────────────────────────────────────────── */
+
 .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 0;
+    padding: 16px 0;
     border-bottom: 1px solid var(--border);
 }
 
-.logo-text { font-size: 1.2rem; font-weight: bold; color: var(--orange); display: block; }
-.logo-sub  { font-size: 0.7rem; color: var(--text-muted); display: block; }
+.header-logo { display: flex; align-items: center; }
+.header-logo:focus { outline: none; }
+
+.logo-img {
+    height: 52px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+}
 
 .btn-connect, .btn-disconnect {
     background: var(--orange);
@@ -58,7 +94,8 @@ body {
 .wallet-connected { display: flex; align-items: center; gap: 10px; }
 .wallet-address { font-size: 0.8rem; color: var(--text-muted); }
 
-/* Tabs */
+/* ── Tabs ────────────────────────────────────────────────────────────────────── */
+
 .tabs {
     display: flex;
     gap: 2px;
@@ -80,16 +117,87 @@ body {
     border-bottom-color: var(--orange);
 }
 
-/* Main */
+/* ── Main ────────────────────────────────────────────────────────────────────── */
+
 .main { flex: 1; padding: 32px 0; }
 
-/* Mint page */
-.mint-page { max-width: 480px; margin: 0 auto; text-align: center; }
-.mint-hero h1 { font-size: 1.8rem; margin-bottom: 8px; }
-.mint-hero p { color: var(--text-muted); margin-bottom: 6px; }
-.mint-note { font-size: 0.8rem; color: var(--text-muted); }
+/* ── Mint page ───────────────────────────────────────────────────────────────── */
 
-/* Mint section */
+.mint-page { display: flex; flex-direction: column; }
+
+/* Banner — full width, breaks out of the 16px body padding */
+.banner-img {
+    width: calc(100% + 32px);
+    margin-left: -16px;
+    height: auto;
+    display: block;
+    max-height: 280px;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* ── NFT teaser strip ────────────────────────────────────────────────────────── */
+
+.nft-strip {
+    position: relative;
+    overflow: hidden;
+    height: 148px;
+    margin: 20px -16px;
+}
+
+/* Gradient fade on both sides */
+.nft-strip::before,
+.nft-strip::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none;
+}
+.nft-strip::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg) 20%, transparent);
+}
+.nft-strip::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg) 20%, transparent);
+}
+
+.nft-strip-inner {
+    display: flex;
+    gap: 8px;
+    padding: 0 8px;
+    height: 100%;
+    align-items: center;
+}
+
+.nft-strip-inner img {
+    width: 132px;
+    height: 132px;
+    object-fit: cover;
+    flex-shrink: 0;
+    opacity: 0.52;
+    filter: blur(1px);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* ── Mint content (centered) ─────────────────────────────────────────────────── */
+
+.mint-content {
+    max-width: 480px;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+}
+
+.mint-hero h1 { font-size: 1.8rem; margin-bottom: 8px; }
+.mint-hero p  { color: var(--text-muted); margin-bottom: 6px; }
+.mint-note    { font-size: 0.8rem; color: var(--text-muted); }
+
+/* ── Mint section ────────────────────────────────────────────────────────────── */
+
 .mint-section { margin-top: 32px; }
 .mint-stats {
     display: flex;
@@ -171,7 +279,8 @@ body {
     font-family: inherit;
 }
 
-/* Gallery */
+/* ── Gallery ─────────────────────────────────────────────────────────────────── */
+
 .gallery-header {
     display: flex;
     align-items: center;
@@ -196,7 +305,8 @@ body {
     gap: 16px;
 }
 
-/* Token card */
+/* ── Token card ──────────────────────────────────────────────────────────────── */
+
 .token-card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -252,13 +362,16 @@ body {
 .btn-equip { background: var(--orange); color: #000; }
 .btn-unequip { background: var(--surface2); border: 1px solid var(--border); color: var(--text-muted); }
 
-/* Footer */
+/* ── Footer ──────────────────────────────────────────────────────────────────── */
+
 .footer {
     padding: 20px 0;
     border-top: 1px solid var(--border);
     display: flex;
     gap: 20px;
     justify-content: center;
+    position: relative;
+    z-index: 1;
 }
 .footer a { color: var(--text-muted); text-decoration: none; font-size: 0.8rem; }
 .footer a:hover { color: var(--orange); }
