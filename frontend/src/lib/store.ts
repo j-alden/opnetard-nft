@@ -26,6 +26,7 @@ interface NFTStore {
     mintedTokenIds: number[];
     mintAmount: number;
     setMintStatus: (status: MintStatus) => void;
+    setMintTxId: (txId: string) => void;
     setMintResult: (txId: string, tokenIds: number[]) => void;
     setMintError: (error: string) => void;
     setMintAmount: (n: number) => void;
@@ -50,6 +51,7 @@ export const useNFTStore = create<NFTStore>()(
             mintedTokenIds: [],
             mintAmount: 0,
             setMintStatus: (mintStatus) => set({ mintStatus }),
+            setMintTxId: (mintTxId) => set({ mintTxId }),
             setMintResult: (txId, tokenIds) =>
                 set({ mintStatus: 'success', mintTxId: txId, mintedTokenIds: tokenIds }),
             setMintError: (error) => set({ mintStatus: 'error', mintError: error }),

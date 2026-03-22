@@ -19,6 +19,7 @@ export function useNFTContract() {
     const { address, walletAddress } = useWallet();
     const {
         setMintStatus,
+        setMintTxId,
         setMintResult,
         setMintError,
         setMintAmount,
@@ -56,6 +57,8 @@ export function useNFTContract() {
             setMintStatus('simulating');
 
             try {
+                console.log('[mint] starting — amount:', amount, 'address:', address);
+
                 const contract = getContract<IOpnetardNFTContract>(
                     NFT_CONTRACT_ADDRESS,
                     OPNETARD_NFT_ABI,
@@ -65,6 +68,7 @@ export function useNFTContract() {
                 );
 
                 const totalCost = BigInt(MINT_PRICE_SATS) * BigInt(amount);
+                console.log('[mint] totalCost (sats):', totalCost.toString());
 
                 // Set payment output BEFORE simulate
                 contract.setTransactionDetails({
@@ -77,15 +81,19 @@ export function useNFTContract() {
                     }],
                 });
 
+                console.log('[mint] simulating...');
                 const sim = await contract.mint(BigInt(amount));
+                console.log('[mint] sim result:', sim);
 
                 if (sim.revert) {
                     throw new Error(`Simulation reverted: ${sim.revert}`);
                 }
 
                 setMintStatus('pending');
+                console.log('[mint] sending transaction...');
 
                 const gasParams = await provider.gasParameters();
+                console.log('[mint] feeRate:', gasParams.bitcoin.recommended.medium);
 
                 const receipt = await sim.sendTransaction({
                     signer: null,
@@ -97,13 +105,17 @@ export function useNFTContract() {
                     extraOutputs: [{ address: CONTRACT_PAYMENT_ADDRESS, value: toSatoshi(totalCost) }],
                 });
 
+                console.log('[mint] receipt:', receipt);
                 const txId = receipt.transactionId;
+                console.log('[mint] txId:', txId);
+                setMintTxId(txId);
                 setMintStatus('confirming');
 
                 const tokenIds = await pollForMintedEvent(txId, amount);
                 setMintResult(txId, tokenIds);
                 await loadStats();
             } catch (err) {
+                console.error('[mint] error:', err);
                 setMintError(err instanceof Error ? err.message : String(err));
             }
         },
