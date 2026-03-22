@@ -40,7 +40,6 @@ export function App() {
                         key={id}
                         src={`${IMAGE_BASE}/${id}.png`}
                         alt=""
-                        loading="lazy"
                     />
                 ))}
             </div>
