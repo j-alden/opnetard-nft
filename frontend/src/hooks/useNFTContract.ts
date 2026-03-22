@@ -62,7 +62,7 @@ export function useNFTContract() {
                     address,
                 );
 
-                const totalCost = MINT_PRICE_SATS * BigInt(amount);
+                const totalCost = BigInt(MINT_PRICE_SATS) * BigInt(amount);
 
                 // Set payment output BEFORE simulate
                 contract.setTransactionDetails({

@@ -13,10 +13,10 @@ export const CONTRACT_PAYMENT_ADDRESS = 'bc1p6xun83aper025lr4yua00nykr354drys2y5
 
 // ── Collection ────────────────────────────────────────────────────────────────
 export const COLLECTION_SIZE = 1000;
-export const MINT_PRICE_SATS = 10_000n; // 10,000 sats ≈ $8.50
+export const MINT_PRICE_SATS = 10_000; // 10,000 sats ≈ $8.50
 
 // Block at which the contract was deployed (for event indexing)
 export const DEPLOYMENT_BLOCK = 941752n;
 
 // Cache version — bump to invalidate localStorage cache
-export const CACHE_VERSION = 1;
+export const CACHE_VERSION = 2;

@@ -11,7 +11,7 @@ export function MintSection() {
     const { mintStatus, mintError, mintTxId, mintedTokenIds, totalMinted, mintPrice, resetMint } =
         useNFTStore();
 
-    const totalCostSats = mintPrice * BigInt(amount);
+    const totalCostSats = mintPrice * amount;
     const remaining = COLLECTION_SIZE - totalMinted;
     const soldOut = remaining <= 0;
 
@@ -32,7 +32,7 @@ export function MintSection() {
                     <div className="mint-cost">
                         {totalCostSats.toLocaleString()} sats
                         <span className="mint-usd">
-                            {' '}≈ ${((Number(totalCostSats) / 100_000_000) * 85_000).toFixed(2)}
+                            {' '}≈ ${((totalCostSats / 100_000_000) * 85_000).toFixed(2)}
                         </span>
                     </div>
                     <button className="btn-mint" onClick={() => mint(amount).catch(console.error)}>

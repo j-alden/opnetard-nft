@@ -31,8 +31,8 @@ interface NFTStore {
 
     totalMinted: number;
     setTotalMinted: (n: number) => void;
-    mintPrice: bigint;
-    setMintPrice: (price: bigint) => void;
+    mintPrice: number;
+    setMintPrice: (price: bigint | number) => void;
 
     ownedTokens: OwnedToken[];
     setOwnedTokens: (tokens: OwnedToken[]) => void;
@@ -56,7 +56,7 @@ export const useNFTStore = create<NFTStore>()(
             totalMinted: 0,
             setTotalMinted: (totalMinted) => set({ totalMinted }),
             mintPrice: MINT_PRICE_SATS,
-            setMintPrice: (mintPrice) => set({ mintPrice }),
+            setMintPrice: (price) => set({ mintPrice: Number(price) }),
 
             ownedTokens: [],
             setOwnedTokens: (ownedTokens) => set({ ownedTokens }),
@@ -70,6 +70,9 @@ export const useNFTStore = create<NFTStore>()(
         {
             name: 'opnetard-nft-store',
             version: CACHE_VERSION,
+            // Only persist the gallery — everything else resets on load
+            // (bigints can't be JSON-serialized; mint state should always start fresh)
+            partialize: (state) => ({ ownedTokens: state.ownedTokens }),
         },
     ),
 );
