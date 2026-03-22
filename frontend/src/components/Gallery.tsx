@@ -8,8 +8,10 @@ import { TokenCard } from './TokenCard';
 export function Gallery() {
     const { loadGallery } = useGallery();
     const { equip, unequip } = useNFTContract();
-    const { ownedTokens, updateToken } = useNFTStore();
+    const { ownedTokens, updateToken, mintStatus, mintTxId } = useNFTStore();
     const { isConnected } = useWallet();
+
+    const isMinting = mintStatus === 'simulating' || mintStatus === 'pending' || mintStatus === 'confirming';
 
     useEffect(() => {
         if (isConnected) {
@@ -44,6 +46,20 @@ export function Gallery() {
     if (ownedTokens.length === 0) {
         return (
             <div className="gallery-empty">
+                {isMinting && (
+                    <div className="mint-pending-notice">
+                        <span className="mint-pending-dot" />
+                        {mintStatus === 'confirming' ? 'Mint broadcast — waiting for Bitcoin block.' : 'Mint in progress…'}
+                        {mintTxId && mintStatus === 'confirming' && (
+                            <span>
+                                {' '}
+                                <a href={`https://opscan.org/transactions/${mintTxId}?network=mainnet`} target="_blank" rel="noreferrer">View on OPScan</a>
+                                {' · '}
+                                <a href={`https://mempool.space/tx/${mintTxId}`} target="_blank" rel="noreferrer">Mempool</a>
+                            </span>
+                        )}
+                    </div>
+                )}
                 <p>No OPNETARDs found.</p>
                 <button onClick={() => loadGallery().catch(console.error)}>Refresh</button>
             </div>
@@ -52,6 +68,20 @@ export function Gallery() {
 
     return (
         <div className="gallery">
+            {isMinting && (
+                <div className="mint-pending-notice">
+                    <span className="mint-pending-dot" />
+                    {mintStatus === 'confirming' ? 'Mint broadcast — waiting for Bitcoin block.' : 'Mint in progress…'}
+                    {mintTxId && mintStatus === 'confirming' && (
+                        <span>
+                            {' '}
+                            <a href={`https://opscan.org/transactions/${mintTxId}?network=mainnet`} target="_blank" rel="noreferrer">View on OPScan</a>
+                            {' · '}
+                            <a href={`https://mempool.space/tx/${mintTxId}`} target="_blank" rel="noreferrer">Mempool</a>
+                        </span>
+                    )}
+                </div>
+            )}
             <div className="gallery-header">
                 <h2>Your OPNETARDs ({ownedTokens.length})</h2>
                 <button className="btn-refresh" onClick={() => loadGallery().catch(console.error)}>

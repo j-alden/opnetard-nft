@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useWallet } from './hooks/useWallet';
 import { useNFTContract } from './hooks/useNFTContract';
+import { useNFTStore } from './lib/store';
 import { MintSection } from './components/MintSection';
 import { Gallery } from './components/Gallery';
-import { NFT_CONTRACT_ADDRESS } from './config';
 import './index.css';
 
 type Tab = 'mint' | 'gallery';
@@ -22,7 +22,10 @@ const MOSAIC_TOKENS = [
 export function App() {
     const { walletAddress, isConnected, connect, disconnect } = useWallet();
     const { loadStats } = useNFTContract();
+    const { mintStatus, mintTxId } = useNFTStore();
     const [tab, setTab] = useState<Tab>('mint');
+
+    const isMinting = mintStatus === 'simulating' || mintStatus === 'pending' || mintStatus === 'confirming';
 
     useEffect(() => {
         loadStats().catch(console.error);
@@ -69,6 +72,23 @@ export function App() {
                 </div>
             </header>
 
+            {isMinting && (
+                <div className="mint-pending-bar">
+                    <span className="mint-pending-dot" />
+                    {mintStatus === 'confirming'
+                        ? 'Mint broadcast — waiting for Bitcoin block.'
+                        : 'Mint in progress…'}
+                    {mintTxId && mintStatus === 'confirming' && (
+                        <span>
+                            {' '}
+                            <a href={`https://opscan.org/transactions/${mintTxId}?network=mainnet`} target="_blank" rel="noreferrer">OPScan</a>
+                            {' · '}
+                            <a href={`https://mempool.space/tx/${mintTxId}`} target="_blank" rel="noreferrer">Mempool</a>
+                        </span>
+                    )}
+                </div>
+            )}
+
             <nav className="tabs">
                 <button
                     className={`tab ${tab === 'mint' ? 'active' : ''}`}
@@ -107,7 +127,7 @@ export function App() {
                 <a href="https://opnet.org" target="_blank" rel="noreferrer">OPNet</a>
                 <a href="https://t.me/opnetard" target="_blank" rel="noreferrer">Telegram</a>
                 <a href="https://x.com/opnetard" target="_blank" rel="noreferrer">Twitter</a>
-                <a href={`https://opscan.org/address/${NFT_CONTRACT_ADDRESS}?network=mainnet`} target="_blank" rel="noreferrer">Contract</a>
+                <a href="https://opscan.org/contracts/0x0f9fd9d56df74d6b0d4300c01893afdfa5b034f2eedb3bf5e212df8a29d6c6dc?network=mainnet" target="_blank" rel="noreferrer">Contract</a>
             </footer>
         </div>
     );

@@ -24,9 +24,11 @@ interface NFTStore {
     mintTxId: string | null;
     mintError: string | null;
     mintedTokenIds: number[];
+    mintAmount: number;
     setMintStatus: (status: MintStatus) => void;
     setMintResult: (txId: string, tokenIds: number[]) => void;
     setMintError: (error: string) => void;
+    setMintAmount: (n: number) => void;
     resetMint: () => void;
 
     totalMinted: number;
@@ -46,12 +48,14 @@ export const useNFTStore = create<NFTStore>()(
             mintTxId: null,
             mintError: null,
             mintedTokenIds: [],
+            mintAmount: 0,
             setMintStatus: (mintStatus) => set({ mintStatus }),
             setMintResult: (txId, tokenIds) =>
                 set({ mintStatus: 'success', mintTxId: txId, mintedTokenIds: tokenIds }),
             setMintError: (error) => set({ mintStatus: 'error', mintError: error }),
+            setMintAmount: (mintAmount) => set({ mintAmount }),
             resetMint: () =>
-                set({ mintStatus: 'idle', mintTxId: null, mintError: null, mintedTokenIds: [] }),
+                set({ mintStatus: 'idle', mintTxId: null, mintError: null, mintedTokenIds: [], mintAmount: 0 }),
 
             totalMinted: 0,
             setTotalMinted: (totalMinted) => set({ totalMinted }),
@@ -70,9 +74,17 @@ export const useNFTStore = create<NFTStore>()(
         {
             name: 'opnetard-nft-store',
             version: CACHE_VERSION,
-            // Only persist the gallery — everything else resets on load
-            // (bigints can't be JSON-serialized; mint state should always start fresh)
-            partialize: (state) => ({ ownedTokens: state.ownedTokens }),
+            // Persist gallery + in-flight mint so txId survives a page refresh.
+            // 'confirming' resumes polling on next load; 'success' keeps the receipt visible.
+            partialize: (state) => ({
+                ownedTokens: state.ownedTokens,
+                mintTxId: state.mintTxId,
+                mintAmount: state.mintAmount,
+                mintedTokenIds: state.mintedTokenIds,
+                mintStatus: (state.mintStatus === 'confirming' || state.mintStatus === 'success')
+                    ? state.mintStatus
+                    : 'idle',
+            }),
         },
     ),
 );

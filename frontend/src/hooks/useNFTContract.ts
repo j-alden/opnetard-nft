@@ -2,7 +2,7 @@
  * useNFTContract — mint flow and contract interaction hook.
  */
 
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { getContract, JSONRpcProvider } from 'opnet';
 import { toSatoshi } from '@btc-vision/bitcoin';
 import { useNFTStore } from '../lib/store';
@@ -21,6 +21,7 @@ export function useNFTContract() {
         setMintStatus,
         setMintResult,
         setMintError,
+        setMintAmount,
         resetMint,
         setTotalMinted,
         setMintPrice,
@@ -51,6 +52,7 @@ export function useNFTContract() {
         async (amount: number) => {
             if (!address || !walletAddress) throw new Error('Wallet not connected');
             resetMint();
+            setMintAmount(amount);
             setMintStatus('simulating');
 
             try {
@@ -160,6 +162,20 @@ export function useNFTContract() {
             feeRate: gasParams.bitcoin.recommended.medium,
         });
     }, [address, walletAddress]);
+
+    // On mount: if a confirming tx survived a page refresh, resume polling for it.
+    useEffect(() => {
+        const { mintStatus, mintTxId, mintAmount } = useNFTStore.getState();
+        if (mintStatus !== 'confirming' || !mintTxId) return;
+
+        pollForMintedEvent(mintTxId, mintAmount)
+            .then((tokenIds) => {
+                setMintResult(mintTxId, tokenIds);
+                loadStats().catch(console.error);
+            })
+            .catch(console.error);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return { mint, equip, unequip, loadStats };
 }

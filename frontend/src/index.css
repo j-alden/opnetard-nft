@@ -105,6 +105,49 @@ body {
 .wallet-connected { display: flex; align-items: center; gap: 10px; }
 .wallet-address { font-size: 0.8rem; color: var(--text-muted); }
 
+/* ── Mint pending bar ────────────────────────────────────────────────────────*/
+
+.mint-pending-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    background: rgba(249,115,22,0.12);
+    border-bottom: 1px solid rgba(249,115,22,0.30);
+    font-size: 0.8rem;
+    color: var(--orange);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+.mint-pending-bar a { color: var(--orange); font-size: 0.8rem; }
+
+.mint-pending-notice {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: rgba(249,115,22,0.10);
+    border: 1px solid rgba(249,115,22,0.30);
+    margin-bottom: 16px;
+    font-size: 0.8rem;
+    color: var(--orange);
+}
+.mint-pending-notice a { color: var(--orange); font-size: 0.8rem; }
+
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.3; }
+}
+.mint-pending-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--orange);
+    flex-shrink: 0;
+    animation: pulse-dot 1.2s ease-in-out infinite;
+}
+
 /* ── Tabs ────────────────────────────────────────────────────────────────────*/
 
 .tabs {
