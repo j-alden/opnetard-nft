@@ -11,11 +11,16 @@ import { useWallet } from './useWallet';
 
 const provider = new JSONRpcProvider({ url: RPC_URL, network: NETWORK });
 
+const BLOB_BASE = 'https://oclumhz0aoevupwq.public.blob.vercel-storage.com';
+
 function ipfsToHttp(uri: string): string {
     if (uri.startsWith('ipfs://')) {
-        const path = uri.slice(7); // e.g. "CID/1.png"
-        const [cid, ...rest] = path.split('/');
-        return `https://${cid}.ipfs.w3s.link/${rest.join('/')}`;
+        const path = uri.slice(7); // e.g. "CID/filename"
+        const [, ...rest] = path.split('/');
+        const file = rest.join('/');
+        // Serve from Vercel Blob CDN — fast, always-on
+        if (file.endsWith('.png')) return `${BLOB_BASE}/nft/images/${file}`;
+        return `${BLOB_BASE}/nft/metadata/${file}`;
     }
     return uri;
 }
