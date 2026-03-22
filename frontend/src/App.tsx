@@ -3,6 +3,7 @@ import { useWallet } from './hooks/useWallet';
 import { useNFTContract } from './hooks/useNFTContract';
 import { MintSection } from './components/MintSection';
 import { Gallery } from './components/Gallery';
+import { NFT_CONTRACT_ADDRESS } from './config';
 import './index.css';
 
 type Tab = 'mint' | 'gallery';
@@ -106,6 +107,7 @@ export function App() {
                 <a href="https://opnet.org" target="_blank" rel="noreferrer">OPNet</a>
                 <a href="https://t.me/opnetard" target="_blank" rel="noreferrer">Telegram</a>
                 <a href="https://x.com/opnetard" target="_blank" rel="noreferrer">Twitter</a>
+                <a href={`https://opscan.org/address/${NFT_CONTRACT_ADDRESS}?network=mainnet`} target="_blank" rel="noreferrer">Contract</a>
             </footer>
         </div>
     );
