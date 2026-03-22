@@ -13,7 +13,9 @@ const provider = new JSONRpcProvider({ url: RPC_URL, network: NETWORK });
 
 function ipfsToHttp(uri: string): string {
     if (uri.startsWith('ipfs://')) {
-        return `https://gateway.pinata.cloud/ipfs/${uri.slice(7)}`;
+        const path = uri.slice(7); // e.g. "CID/1.png"
+        const [cid, ...rest] = path.split('/');
+        return `https://${cid}.ipfs.w3s.link/${rest.join('/')}`;
     }
     return uri;
 }
