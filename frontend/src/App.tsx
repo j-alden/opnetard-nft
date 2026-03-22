@@ -7,7 +7,7 @@ import './index.css';
 
 type Tab = 'mint' | 'gallery';
 
-const IMAGE_BASE = 'https://w3s.link/ipfs/bafybeiexy2r77dgaqjarl4dse6vqp3girxvttrpozdn3rcjjjyxlmnaakq';
+const IMAGE_BASE = '/mosaic';
 
 // 25 tokens spread evenly across the 1000 — shows variety without revealing the full collection
 const MOSAIC_TOKENS = [
