@@ -47,15 +47,6 @@ export function App() {
             {/* Dark overlay sits on top of mosaic, under content */}
             <div className="mosaic-overlay" aria-hidden="true" />
 
-            {/* Banner — full bleed, at the very top */}
-            <div className="banner-wrap">
-                <img
-                    src="https://www.magicinternet.meme/opnetard-banner.png"
-                    alt="OPNETARD"
-                    className="banner-img"
-                />
-            </div>
-
             <header className="header">
                 <a href="https://opnetard.com" target="_blank" rel="noreferrer" className="header-logo">
                     <img
@@ -80,6 +71,15 @@ export function App() {
                     )}
                 </div>
             </header>
+
+            {/* Banner — below header */}
+            <div className="banner-wrap">
+                <img
+                    src="https://www.magicinternet.meme/opnetard-banner.png"
+                    alt="OPNETARD"
+                    className="banner-img"
+                />
+            </div>
 
             <nav className="tabs">
                 <button

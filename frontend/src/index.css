@@ -35,7 +35,7 @@ body {
     align-content: start;
     /* Scale up slightly so blur doesn't leave transparent edges */
     transform: scale(1.08);
-    filter: blur(6px) saturate(1.3) brightness(0.65);
+    filter: blur(5px) saturate(1.5) brightness(0.85);
     pointer-events: none;
     overflow: hidden;
 }
@@ -47,13 +47,12 @@ body {
     display: block;
 }
 
-/* Dark gradient overlay — content readable, mosaic visible but subdued */
+/* Dark overlay — light enough to see the mosaic, dark enough to read text */
 .mosaic-overlay {
     position: fixed;
     inset: 0;
     z-index: 1;
-    background:
-        radial-gradient(ellipse at center, rgba(10,10,10,0.72) 0%, rgba(10,10,10,0.88) 100%);
+    background: rgba(8, 8, 8, 0.52);
     pointer-events: none;
 }
 
@@ -73,20 +72,23 @@ body {
 }
 
 /* ── Banner ──────────────────────────────────────────────────────────────────
-   Full-bleed at the very top, before the header.                             */
+   Below the header. Breaks out to full viewport width. Shows the full image. */
 
 .banner-wrap {
-    width: calc(100% + 32px);
-    margin-left: -16px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    background: #000;
+    line-height: 0;
 }
 
 .banner-img {
     width: 100%;
-    height: auto;
-    display: block;
-    max-height: 260px;
-    object-fit: cover;
+    max-height: 140px;
+    object-fit: contain;
     object-position: center;
+    display: block;
 }
 
 /* ── Header ──────────────────────────────────────────────────────────────────*/
@@ -96,15 +98,10 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 14px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    background: rgba(10,10,10,0.55);
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+    background: rgba(8,8,8,0.70);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    /* pull edge-to-edge to fill behind padding */
-    width: calc(100% + 32px);
-    margin-left: -16px;
-    padding-left: 16px;
-    padding-right: 16px;
 }
 
 .header-logo { display: flex; align-items: center; text-decoration: none; }
@@ -165,16 +162,16 @@ body {
     justify-content: center;
 }
 
-/* Dark frosted card — lets the mosaic breathe around it on wide screens */
+/* Frosted card over the mosaic */
 .mint-content {
     max-width: 480px;
     width: 100%;
     text-align: center;
-    background: rgba(10,10,10,0.82);
-    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(8,8,8,0.78);
+    border: 1px solid rgba(249,115,22,0.25);
     padding: 32px 28px;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
 }
 
 .mint-hero h1 { font-size: 1.8rem; margin-bottom: 8px; }
