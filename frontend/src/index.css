@@ -35,7 +35,7 @@ body {
     align-content: start;
     /* Scale up slightly so blur doesn't leave transparent edges */
     transform: scale(1.08);
-    filter: blur(5px) saturate(1.5) brightness(0.85);
+    filter: blur(5px) saturate(1.4) brightness(0.45);
     pointer-events: none;
     overflow: hidden;
 }
@@ -47,14 +47,8 @@ body {
     display: block;
 }
 
-/* Dark overlay — light enough to see the mosaic, dark enough to read text */
-.mosaic-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-    background: rgba(8, 8, 8, 0.30);
-    pointer-events: none;
-}
+/* No overlay div — darkness is baked into the mosaic filter instead,
+   so it never covers banners, header, or content. */
 
 /* ── App shell ───────────────────────────────────────────────────────────────
    Transparent so the mosaic shows through underneath.                        */

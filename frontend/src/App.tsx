@@ -43,9 +43,6 @@ export function App() {
                     />
                 ))}
             </div>
-            {/* Dark overlay sits on top of mosaic, under content */}
-            <div className="mosaic-overlay" aria-hidden="true" />
-
             {/* Banner — full-width, at the very top */}
             <div className="banner-wrap">
                 <img
