@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNFTContract } from '../hooks/useNFTContract';
 import { useNFTStore } from '../lib/store';
 import { useWallet } from '../hooks/useWallet';
-import { COLLECTION_SIZE } from '../config';
+import { COLLECTION_SIZE, MINT_PRICE_SATS } from '../config';
 
 export function MintSection() {
     const [amount, setAmount] = useState(1);
@@ -11,7 +11,8 @@ export function MintSection() {
     const { mintStatus, mintError, mintTxId, mintedTokenIds, totalMinted, mintPrice, resetMint } =
         useNFTStore();
 
-    const totalCostSats = mintPrice * amount;
+    const effectivePrice = mintPrice || MINT_PRICE_SATS;
+    const totalCostSats = effectivePrice * amount;
     const remaining = COLLECTION_SIZE - totalMinted;
     const soldOut = remaining <= 0;
 
